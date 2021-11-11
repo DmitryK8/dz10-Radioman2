@@ -5,75 +5,78 @@ public class Radio {
     private int currentVolume;
     private int sumStation = 18;
 
+    public Radio() {
+
+    }
+
+    public Radio(int sumStation) {
+        this.sumStation = sumStation;
+    }
+
     public int getSumStation() {
-        return this.sumStation;
+        return sumStation;
     }
 
     public void setSumStation(int sumStation) {
-        this.sumStation = sumStation;
-    }
-
-    public Radio(int currentStation, int currentVolume, int sumStation) {
-        this.currentStation = currentStation;
-        this.currentVolume = currentVolume;
-        this.sumStation = sumStation;
-    }
-
-    public Radio() {
-    }
-
-    public void setCurrentStation(int newCurrentStation) {
-        if (newCurrentStation >= 0) {
-            if (newCurrentStation <= 17) {
-                this.currentStation = newCurrentStation;
-            }
+        if (sumStation < 0) {
+            return;
         }
+        this.sumStation = sumStation;
     }
 
     public int getCurrentStation() {
-        return this.currentStation;
+        return currentStation;
     }
 
-    public void setNextStation() {
-        if (this.currentStation < 17) {
-            ++this.currentStation;
-        } else {
-            this.currentStation = 0;
+    public void setCurrentStation(int currentStation) {
+        if (currentStation > sumStation - 1) {
+            return;
         }
-
-    }
-
-    public void setBackStation() {
-        if (this.currentStation > 0) {
-            --this.currentStation;
-        } else {
-            this.currentStation = 17;
+        if (currentStation < 0) {
+            return;
         }
-
+        this.currentStation = currentStation;
     }
 
-    public void setCurrentVolume(int newCurrentVolume) {
-        if (newCurrentVolume >= 0) {
-            if (newCurrentVolume <= 100) {
-                this.currentVolume = newCurrentVolume;
-            }
+    public void nextStation() {
+        if (currentStation < sumStation - 1) {
+            currentStation++;
+        } else {
+            currentStation = 0;
+        }
+    }
+
+    public void backStation() {
+        if (currentStation > 0) {
+            currentStation--;
+        } else {
+            currentStation = sumStation - 1;
         }
     }
 
     public int getCurrentVolume() {
-        return this.currentVolume;
+        return currentVolume;
     }
 
-    public void setIncreaseVolume() {
-        if (this.currentVolume < 100) {
-            ++this.currentVolume;
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume > 100) {
+            return;
         }
-
+        if (currentVolume < 0) {
+            return;
+        }
+        this.currentVolume = currentVolume;
     }
 
-    public void setReduceVolume() {
-        if (this.currentVolume > 0) {
-            --this.currentVolume;
+    public void increaseVolume() {
+        if (currentVolume < 100) {
+            currentVolume++;
+        }
+    }
+
+    public void reduceVolume() {
+        if (currentVolume > 0) {
+            currentVolume--;
         }
     }
 }
